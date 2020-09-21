@@ -19,11 +19,11 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'EasyGraph'
-copyright = '2020, lizheng'
-author = 'lizheng'
+copyright = '2020, Mobile Systems and Networking Group, Fudan University'
+author = 'Mobile Systems and Networking Group, Fudan University'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2a4'
 
 
 # -- General configuration ---------------------------------------------------
