@@ -8,16 +8,16 @@ Please feel free to email us at zliek.sh@gmail.com.
 
 Key Developers
 --------------
-* Zheng Li (Lead), 
-* `Xinlei He <https://willingnesshxl.github.io/xlhe/>`_, 
-* Yuting Shao, 
-* Ruichen Li, 
-* Yi Sun, 
+* Zheng Li (Lead)
+* `Xinlei He <https://willingnesshxl.github.io/xlhe/>`_
+* Yuting Shao
+* Ruichen Li
+* Yi Sun
 * Zihang Lin
 
 Advisors
 ---------
-* `Prof. Yang Chen <https://chenyang03.wordpress.com/>`_, 
+* `Prof. Yang Chen <https://chenyang03.wordpress.com/>`_
 * `Dr. Qingyuan Gong <https://gongqingyuan.wordpress.com/>`_
 
 Acknowledgement
