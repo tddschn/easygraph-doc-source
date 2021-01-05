@@ -19,7 +19,7 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'EasyGraph'
-copyright = '2020, Mobile Systems and Networking Group, Fudan University'
+copyright = '2020-2021, Mobile Systems and Networking Group, Fudan University'
 author = 'Mobile Systems and Networking Group, Fudan University'
 
 # The full version, including alpha/beta/rc tags
