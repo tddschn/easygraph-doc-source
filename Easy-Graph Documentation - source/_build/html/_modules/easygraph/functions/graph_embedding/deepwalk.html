@@ -1,67 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>easygraph.functions.graph_embedding.deepwalk &mdash; EasyGraph 0.2a4 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>easygraph.functions.graph_embedding.deepwalk &mdash; EasyGraph 0.2a38 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/my_theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/language_data.js"></script>
         <script src="../../../../_static/copybutton.js"></script>
-    
-    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> EasyGraph
-          
-
-          
+            <a href="../../../../index.html" class="icon icon-home"> EasyGraph
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -69,89 +35,42 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Videos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../sourcecode.html">Source Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../aboutus.html">About Us</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">EasyGraph</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../../../index.html">Module code</a> &raquo;</li>
-        
       <li>easygraph.functions.graph_embedding.deepwalk</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for easygraph.functions.graph_embedding.deepwalk</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">easygraph</span> <span class="k">as</span> <span class="nn">eg</span>
 
@@ -159,13 +78,17 @@
 <span class="kn">from</span> <span class="nn">easygraph.functions.graph_embedding.node2vec</span> <span class="kn">import</span> <span class="n">_get_embedding_result_from_gensim_skipgram_model</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">easygraph.utils</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;deepwalk&quot;</span><span class="p">]</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;deepwalk&quot;</span>
-<span class="p">]</span>
-
-<div class="viewcode-block" id="deepwalk"><a class="viewcode-back" href="../../../../reference/generated/easygraph.functions.graph_embedding.deepwalk.deepwalk.html#easygraph.functions.graph_embedding.deepwalk.deepwalk">[docs]</a><span class="k">def</span> <span class="nf">deepwalk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">walk_length</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">num_walks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="o">**</span><span class="n">skip_gram_params</span><span class="p">):</span>
+<div class="viewcode-block" id="deepwalk"><a class="viewcode-back" href="../../../../reference/generated/easygraph.functions.graph_embedding.deepwalk.deepwalk.html#easygraph.functions.graph_embedding.deepwalk.deepwalk">[docs]</a><span class="nd">@not_implemented_for</span><span class="p">(</span><span class="s2">&quot;multigraph&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">deepwalk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+             <span class="n">dimensions</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+             <span class="n">walk_length</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+             <span class="n">num_walks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+             <span class="o">**</span><span class="n">skip_gram_params</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Graph embedding via DeepWalk.</span>
 
 <span class="sd">    Parameters</span>
@@ -173,16 +96,16 @@
 <span class="sd">    G : easygraph.Graph or easygraph.DiGraph</span>
 
 <span class="sd">    dimensions : int</span>
-<span class="sd">        Embedding dimensions, optinal(default: 128)</span>
+<span class="sd">        Embedding dimensions, optional(default: 128)</span>
 
 <span class="sd">    walk_length : int</span>
-<span class="sd">        Number of nodes in each walk, optinal(default: 80)</span>
+<span class="sd">        Number of nodes in each walk, optional(default: 80)</span>
 
 <span class="sd">    num_walks : int</span>
-<span class="sd">        Number of walks per node, optinal(default: 10)</span>
+<span class="sd">        Number of walks per node, optional(default: 10)</span>
 
 <span class="sd">    skip_gram_params : dict</span>
-<span class="sd">        Parameteres for gensim.models.Word2Vec - do not supply `size`, it is taken from the `dimensions` parameter</span>
+<span class="sd">        Parameters for gensim.models.Word2Vec - do not supply `size`, it is taken from the `dimensions` parameter</span>
 
 <span class="sd">    Returns </span>
 <span class="sd">    -------</span>
@@ -213,15 +136,19 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">G_index</span><span class="p">,</span> <span class="n">index_of_node</span><span class="p">,</span> <span class="n">node_of_index</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_index_node_graph</span><span class="p">()</span>
 
-    <span class="n">walks</span> <span class="o">=</span> <span class="n">simulate_walks</span><span class="p">(</span>
-        <span class="n">G_index</span><span class="p">,</span> <span class="n">walk_length</span><span class="o">=</span><span class="n">walk_length</span><span class="p">,</span> <span class="n">num_walks</span><span class="o">=</span><span class="n">num_walks</span><span class="p">)</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">learn_embeddings</span><span class="p">(</span>
-        <span class="n">walks</span><span class="o">=</span><span class="n">walks</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span> <span class="o">**</span><span class="n">skip_gram_params</span><span class="p">)</span>
+    <span class="n">walks</span> <span class="o">=</span> <span class="n">simulate_walks</span><span class="p">(</span><span class="n">G_index</span><span class="p">,</span>
+                           <span class="n">walk_length</span><span class="o">=</span><span class="n">walk_length</span><span class="p">,</span>
+                           <span class="n">num_walks</span><span class="o">=</span><span class="n">num_walks</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">learn_embeddings</span><span class="p">(</span><span class="n">walks</span><span class="o">=</span><span class="n">walks</span><span class="p">,</span>
+                             <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                             <span class="o">**</span><span class="n">skip_gram_params</span><span class="p">)</span>
 
     <span class="n">embedding_vector</span><span class="p">,</span> <span class="n">most_similar_nodes_of_node</span> <span class="o">=</span> <span class="n">_get_embedding_result_from_gensim_skipgram_model</span><span class="p">(</span>
-        <span class="n">G</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">index_of_node</span><span class="o">=</span><span class="n">index_of_node</span><span class="p">,</span> <span class="n">node_of_index</span><span class="o">=</span><span class="n">node_of_index</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span>
-    <span class="p">)</span>
-    
+        <span class="n">G</span><span class="o">=</span><span class="n">G</span><span class="p">,</span>
+        <span class="n">index_of_node</span><span class="o">=</span><span class="n">index_of_node</span><span class="p">,</span>
+        <span class="n">node_of_index</span><span class="o">=</span><span class="n">node_of_index</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+
     <span class="k">del</span> <span class="n">G_index</span>
     <span class="k">return</span> <span class="n">embedding_vector</span><span class="p">,</span> <span class="n">most_similar_nodes_of_node</span></div>
 
@@ -233,11 +160,11 @@
     <span class="k">for</span> <span class="n">walk_iter</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_walks</span><span class="p">)):</span>
         <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
-            <span class="n">walks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_deepwalk_walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
-                                        <span class="n">walk_length</span><span class="o">=</span><span class="n">walk_length</span><span class="p">,</span>
-                                        <span class="n">start_node</span><span class="o">=</span><span class="n">node</span><span class="p">))</span>
+            <span class="n">walks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">_deepwalk_walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">walk_length</span><span class="o">=</span><span class="n">walk_length</span><span class="p">,</span> <span class="n">start_node</span><span class="o">=</span><span class="n">node</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">walks</span>
+
 
 <span class="k">def</span> <span class="nf">_deepwalk_walk</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">walk_length</span><span class="p">,</span> <span class="n">start_node</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
@@ -257,49 +184,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2020-2021, Mobile Systems and Networking Group, Fudan University
-
-    </p>
+    <p>&#169; Copyright 2020-2022, Mobile Systems and Networking Group, Fudan University.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

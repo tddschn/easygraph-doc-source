@@ -11,19 +11,19 @@ import sphinx_rtd_theme
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
-
+import os
+import sys
+sys.path.insert(0, os.path.abspath('/Users/bytedance/code/python/Easy-Graph'))
+print(sys.path)
 
 # -- Project information -----------------------------------------------------
 
 project = 'EasyGraph'
-copyright = '2020-2021, Mobile Systems and Networking Group, Fudan University'
+copyright = '2020-2022, Mobile Systems and Networking Group, Fudan University'
 author = 'Mobile Systems and Networking Group, Fudan University'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2a4'
+release = '0.2a38'
 
 
 # -- General configuration ---------------------------------------------------
@@ -43,7 +43,9 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     # 'sphinx_gallery.gen_gallery'
+    "numpydoc",
 ]
+
 
 # The name of the Pygments (syntax highlighting) style to use.
 # pygments_style = 'friendly'
@@ -57,7 +59,12 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-
+# Options for LaTeX output
+# ------------------------
+# Use a latex engine that allows for unicode characters in docstrings
+latex_engine = "xelatex"
+# The paper size ('letter' or 'a4').
+latex_paper_size = "letter"
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -73,4 +80,5 @@ html_static_path = ['_static']
 
 # Add the 'copybutton' javascript, to hide/show the prompt in code examples
 def setup(app):
-    app.add_javascript("copybutton.js")
+    app.add_js_file("copybutton.js")
+    app.add_css_file('my_theme.css')

@@ -3,6 +3,17 @@ Tutorial
 
 This part offers two brief tutorials of how to do graph analysis with **EasyGraph**. 
 
+Example using EasyGraph to analysis and draw Structural Hole Spanners on karate club dataset
+-------------------------
+>>> from easygraph.datasets import get_graph_karateclub
+>>> import easygraph as eg
+>>> G = get_graph_karateclub()
+>>> # Calculate five shs(Structural Hole Spanners) in G
+>>> shs = eg.common_greedy(G, 5)
+>>> # Draw the Graph, and the shs is marked by red star
+>>> eg.draw_SHS_center(G, shs)
+>>> # Draw CDF curves of "Number of Followers" of SH spanners and ordinary users in G.
+>>> eg.plot_Followers(G, shs)
 
 Basic Properties and Operation of Graph
 -------------------------
@@ -145,7 +156,7 @@ Connected components
 >>> eg.connected_component_of_node(G, node=3)
 {1, 2, 3, 4, 5}
 
-Structural Hole Spanners Detection
+Detection of Structural Hole Spanners
 ----------------------------------
 
 Use MaxD for structural hole spanners detection
@@ -223,3 +234,16 @@ Hierarchy of all nodes
 {1: 0.08754463683694338, 2: 0.1544986992144599, 3: 0.04535921163684897, 4: 0.061067624090107915, 5: 0.07134469342227538, 6: 0.035305086439308436, 7: 0.03530508643930843, 8: 0.0011300905133206085, 9: 0.012305615918292673, 10: 0.0, 11: 0.07134469342227538, 13: 0.006282226820057121, 14: 0.01352163842686084, 15: 0.00037766424272729984, 16: 0.00037766424272729984, 17: 0.0, 18: 0.0014421896477064891, 19: 0.00037766424272729984, 20: 0.0033488184456886283, 21: 0.00037766424272729984, 22: 0.0014421896477064891, 23: 0.00037766424272729984, 24: 0.036897065903971515, 25: 0.024311482691998648, 26: 0.024311482691998648, 27: 0.01960343310353982, 28: 0.0086202479405721, 29: 0.007513545360870802, 30: 0.06689992156538088, 31: 0.01286931837997609, 32: 0.020491542893317758, 33: 0.3259402254099858, 34: 0.2416086531756689}
 
 
+Using C++ code to achieve a better performance
+-------------------------
+
+- The GraphC class provides the same methods as the Graph class. e.g. `add_node()`, `add_edges()`
+- Easygraph also provides three functions implemented by C++
+  - `effective_size()`
+  - `constraint()`
+  - `hierarchy()`
+
+**Usage**
+
+- For class methods, calling and parameter passing are the same as python. 
+- For module function, easygraph will select specific codes to execute according to the class of the graph.

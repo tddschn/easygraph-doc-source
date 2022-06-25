@@ -24,5 +24,8 @@ methods in the same platform.
     reference/structural_hole_spanners.rst
     reference/datasets.rst
     reference/drawing.rst
+    reference/readwrite/index.rst
+    reference/centrality.rst
+    reference/graph_generator.rst
     reference/not_sorted.rst
 
