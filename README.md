@@ -1,7 +1,7 @@
 ## How to Build HTML
 
-1. Update the `.rst` file in Easy-Graph Documentation - source
-2. Run powershell or cmd, changing work directory to `docs_using_sphinx`
+1. Update the `.rst` file in `docs_using_sphinx`
+2. Run terminal, changing work directory to `docs_using_sphinx`
 3. run `python3 -m venv .env` for the virtual environment
 4. run `source .env/bin/activate` to activate
 5. run `pip install -r requirements.txt` to install dependencies
