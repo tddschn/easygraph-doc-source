@@ -18,11 +18,11 @@ print(sys.path)
 # -- Project information -----------------------------------------------------
 
 project = 'EasyGraph'
-copyright = '2020-2022, Mobile Systems and Networking Group, Fudan University'
+copyright = '2020-2023, Mobile Systems and Networking Group, Fudan University'
 author = 'Mobile Systems and Networking Group, Fudan University'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2a38'
+release = '0.2a40'
 
 
 # -- General configuration ---------------------------------------------------
@@ -85,7 +85,7 @@ html_static_path = ['_static']
 html_logo = "logo.png"
 
 # change the sidebar title
-html_title = "EasyGraph 0.2"
+html_title = "EasyGraph 0.2a40"
 
 # Add the 'copybutton' javascript, to hide/show the prompt in code examples
 def setup(app):
