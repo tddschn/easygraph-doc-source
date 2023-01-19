@@ -1,0 +1,718 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
+
+    <!-- Generated with Sphinx 5.0.2 and Furo 2022.12.07 -->
+        <title>easygraph.readwrite.tests.test_pajek - EasyGraph 0.2a40</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/my_theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">EasyGraph 0.2a40</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">EasyGraph 0.2a40</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../example.html">Example</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../reference.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.classes.html">easygraph.classes package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.classes.tests.html">easygraph.classes.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.classes.tests.html">easygraph.classes.tests package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.datasets.html">easygraph.datasets package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.html">easygraph.functions.basic package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.tests.html">easygraph.functions.basic.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.tests.html">easygraph.functions.basic.tests package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.centrality.html">easygraph.functions.centrality package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.community.html">easygraph.functions.community package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.community.tests.html">easygraph.functions.community.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.community.tests.html">easygraph.functions.community.tests package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.components.html">easygraph.functions.components package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.drawing.html">easygraph.functions.drawing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.graph_embedding.html">easygraph.functions.graph_embedding package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.graph_generator.html">easygraph.functions.graph_generator package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.path.html">easygraph.functions.path package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.html">easygraph.functions package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.html">easygraph.functions.basic package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.tests.html">easygraph.functions.basic.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.centrality.html">easygraph.functions.centrality package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.community.html">easygraph.functions.community package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.community.tests.html">easygraph.functions.community.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.components.html">easygraph.functions.components package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.drawing.html">easygraph.functions.drawing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.graph_embedding.html">easygraph.functions.graph_embedding package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.graph_generator.html">easygraph.functions.graph_generator package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.path.html">easygraph.functions.path package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.functions.structural_holes.html">easygraph.functions.structural_holes package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.functions.structural_holes.html">easygraph.functions.structural_holes package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.model.hypergraphs.html">easygraph.model.hypergraphs package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.model.html">easygraph.model package</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.model.hypergraphs.html">easygraph.model.hypergraphs package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.hypergraphs.html">easygraph.nn.convs.hypergraphs package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.html">easygraph.nn.convs package</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.hypergraphs.html">easygraph.nn.convs.hypergraphs package</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.nn.html">easygraph.nn package</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.html">easygraph.nn.convs package</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.hypergraphs.html">easygraph.nn.convs.hypergraphs package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.nn.tests.html">easygraph.nn.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.nn.tests.html">easygraph.nn.tests package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.random.html">easygraph.random package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.readwrite.json_graph.html">easygraph.readwrite.json_graph package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.readwrite.html">easygraph.readwrite package</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.readwrite.json_graph.html">easygraph.readwrite.json_graph package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.readwrite.tests.html">easygraph.readwrite.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.readwrite.tests.html">easygraph.readwrite.tests package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/easygraph.html">easygraph package</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.classes.html">easygraph.classes package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.classes.tests.html">easygraph.classes.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.datasets.html">easygraph.datasets package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.html">easygraph.functions package</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.html">easygraph.functions.basic package</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.tests.html">easygraph.functions.basic.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.centrality.html">easygraph.functions.centrality package</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.community.html">easygraph.functions.community package</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.community.tests.html">easygraph.functions.community.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.components.html">easygraph.functions.components package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.drawing.html">easygraph.functions.drawing package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.graph_embedding.html">easygraph.functions.graph_embedding package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.graph_generator.html">easygraph.functions.graph_generator package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.path.html">easygraph.functions.path package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.functions.structural_holes.html">easygraph.functions.structural_holes package</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.model.html">easygraph.model package</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.model.hypergraphs.html">easygraph.model.hypergraphs package</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.nn.html">easygraph.nn package</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.html">easygraph.nn.convs package</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.hypergraphs.html">easygraph.nn.convs.hypergraphs package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.nn.tests.html">easygraph.nn.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.random.html">easygraph.random package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.readwrite.html">easygraph.readwrite package</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.readwrite.json_graph.html">easygraph.readwrite.json_graph package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.readwrite.tests.html">easygraph.readwrite.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.tests.html">easygraph.tests package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/easygraph.utils.html">easygraph.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.tests.html">easygraph.tests package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/easygraph.utils.html">easygraph.utils package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../reference/modules.html">easygraph</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../reference/easygraph.html">easygraph package</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../reference/easygraph.classes.html">easygraph.classes package</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.classes.tests.html">easygraph.classes.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.datasets.html">easygraph.datasets package</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.html">easygraph.functions package</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.html">easygraph.functions.basic package</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../../reference/easygraph.functions.basic.tests.html">easygraph.functions.basic.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.centrality.html">easygraph.functions.centrality package</a></li>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../../reference/easygraph.functions.community.html">easygraph.functions.community package</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" role="switch" type="checkbox"/><label for="toctree-checkbox-27"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../../reference/easygraph.functions.community.tests.html">easygraph.functions.community.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.components.html">easygraph.functions.components package</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.drawing.html">easygraph.functions.drawing package</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.graph_embedding.html">easygraph.functions.graph_embedding package</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.graph_generator.html">easygraph.functions.graph_generator package</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.path.html">easygraph.functions.path package</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.functions.structural_holes.html">easygraph.functions.structural_holes package</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../reference/easygraph.model.html">easygraph.model package</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" role="switch" type="checkbox"/><label for="toctree-checkbox-28"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.model.hypergraphs.html">easygraph.model.hypergraphs package</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../reference/easygraph.nn.html">easygraph.nn package</a><input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" role="switch" type="checkbox"/><label for="toctree-checkbox-29"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.html">easygraph.nn.convs package</a><input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" role="switch" type="checkbox"/><label for="toctree-checkbox-30"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../../../reference/easygraph.nn.convs.hypergraphs.html">easygraph.nn.convs.hypergraphs package</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.nn.tests.html">easygraph.nn.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.random.html">easygraph.random package</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../reference/easygraph.readwrite.html">easygraph.readwrite package</a><input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" role="switch" type="checkbox"/><label for="toctree-checkbox-31"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.readwrite.json_graph.html">easygraph.readwrite.json_graph package</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../reference/easygraph.readwrite.tests.html">easygraph.readwrite.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.tests.html">easygraph.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../reference/easygraph.utils.html">easygraph.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../videos.html">Tutorial Videos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributorGuide.html">Contributor Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sourcecode.html">Source Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../aboutus.html">About Us</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for easygraph.readwrite.tests.test_pajek</h1><div class="highlight"><pre>
+<span></span><span class="c1"># # This file is part of the NetworkX distribution.</span>
+
+<span class="c1"># NetworkX is distributed with the 3-clause BSD license.</span>
+
+
+<span class="c1"># ::</span>
+<span class="c1">#    Copyright (C) 2004-2022, NetworkX Developers</span>
+<span class="c1">#    Aric Hagberg &lt;hagberg@lanl.gov&gt;</span>
+<span class="c1">#    Dan Schult &lt;dschult@colgate.edu&gt;</span>
+<span class="c1">#    Pieter Swart &lt;swart@lanl.gov&gt;</span>
+<span class="c1">#    All rights reserved.</span>
+
+<span class="c1">#    Redistribution and use in source and binary forms, with or without</span>
+<span class="c1">#    modification, are permitted provided that the following conditions are</span>
+<span class="c1">#    met:</span>
+
+<span class="c1">#      * Redistributions of source code must retain the above copyright</span>
+<span class="c1">#        notice, this list of conditions and the following disclaimer.</span>
+
+<span class="c1">#      * Redistributions in binary form must reproduce the above</span>
+<span class="c1">#        copyright notice, this list of conditions and the following</span>
+<span class="c1">#        disclaimer in the documentation and/or other materials provided</span>
+<span class="c1">#        with the distribution.</span>
+
+<span class="c1">#      * Neither the name of the NetworkX Developers nor the names of its</span>
+<span class="c1">#        contributors may be used to endorse or promote products derived</span>
+<span class="c1">#        from this software without specific prior written permission.</span>
+
+<span class="c1">#    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c1">#    &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c1">#    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</span>
+<span class="c1">#    A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
+<span class="c1">#    OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
+<span class="c1">#    SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
+<span class="c1">#    LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<span class="c1">#    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
+<span class="c1">#    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="c1">#    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1">#    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Pajek tests</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">easygraph</span> <span class="k">as</span> <span class="nn">eg</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">eg</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">from</span> <span class="nn">easygraph.utils</span> <span class="kn">import</span> <span class="n">edges_equal</span>
+<span class="kn">from</span> <span class="nn">easygraph.utils</span> <span class="kn">import</span> <span class="n">nodes_equal</span>
+
+
+<span class="c1"># from rich import print</span>
+
+<span class="n">test_parse_pajek_edges</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;A1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;A1&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;h2&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="s2">&quot;Blue&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a1&quot;</span><span class="p">:</span> <span class="s2">&quot;-130&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k1&quot;</span><span class="p">:</span> <span class="s2">&quot;0.6&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a2&quot;</span><span class="p">:</span> <span class="s2">&quot;-130&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k2&quot;</span><span class="p">:</span> <span class="s2">&quot;0.6&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ap&quot;</span><span class="p">:</span> <span class="s2">&quot;0.5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="s2">&quot;Bezier loop&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lc&quot;</span><span class="p">:</span> <span class="s2">&quot;BlueViolet&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;fos&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="s2">&quot;58&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lp&quot;</span><span class="p">:</span> <span class="s2">&quot;0.3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;la&quot;</span><span class="p">:</span> <span class="s2">&quot;360&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;A1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Bb&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;h2&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a1&quot;</span><span class="p">:</span> <span class="s2">&quot;40&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k1&quot;</span><span class="p">:</span> <span class="s2">&quot;2.8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a2&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k2&quot;</span><span class="p">:</span> <span class="s2">&quot;0.8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ap&quot;</span><span class="p">:</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="s2">&quot;Bezier arc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lphi&quot;</span><span class="p">:</span> <span class="s2">&quot;90&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;la&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lp&quot;</span><span class="p">:</span> <span class="s2">&quot;0.65&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;A1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="s2">&quot;Dashed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;h2&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k1&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k2&quot;</span><span class="p">:</span> <span class="s2">&quot;-20&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ap&quot;</span><span class="p">:</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="s2">&quot;Oval arc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="s2">&quot;Brown&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lc&quot;</span><span class="p">:</span> <span class="s2">&quot;Black&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;Bb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;A1&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;h2&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a1&quot;</span><span class="p">:</span> <span class="s2">&quot;120&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k1&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a2&quot;</span><span class="p">:</span> <span class="s2">&quot;-120&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k2&quot;</span><span class="p">:</span> <span class="s2">&quot;0.3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ap&quot;</span><span class="p">:</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="s2">&quot;Bezier arc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lphi&quot;</span><span class="p">:</span> <span class="s2">&quot;270&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;la&quot;</span><span class="p">:</span> <span class="s2">&quot;180&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lp&quot;</span><span class="p">:</span> <span class="s2">&quot;0.5&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;D2&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="s2">&quot;Dashed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;h2&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="s2">&quot;OliveGreen&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ap&quot;</span><span class="p">:</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="s2">&quot;Straight arc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lc&quot;</span><span class="p">:</span> <span class="s2">&quot;PineGreen&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;h1&quot;</span><span class="p">:</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;h2&quot;</span><span class="p">:</span> <span class="s2">&quot;12&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k1&quot;</span><span class="p">:</span> <span class="s2">&quot;-2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k2&quot;</span><span class="p">:</span> <span class="s2">&quot;-15&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ap&quot;</span><span class="p">:</span> <span class="s2">&quot;0.5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="s2">&quot;Circular loop&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="s2">&quot;Red&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lc&quot;</span><span class="p">:</span> <span class="s2">&quot;OrangeRed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lphi&quot;</span><span class="p">:</span> <span class="s2">&quot;270&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;la&quot;</span><span class="p">:</span> <span class="s2">&quot;180&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;D2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Bb&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;h2&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k1&quot;</span><span class="p">:</span> <span class="s2">&quot;-2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;k2&quot;</span><span class="p">:</span> <span class="s2">&quot;250&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ap&quot;</span><span class="p">:</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="s2">&quot;Circular arc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="s2">&quot;Red&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lc&quot;</span><span class="p">:</span> <span class="s2">&quot;OrangeRed&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="TestPajek"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek">[docs]</a><span class="k">class</span> <span class="nc">TestPajek</span><span class="p">:</span>
+<div class="viewcode-block" id="TestPajek.setup_class"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.setup_class">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">setup_class</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;*network Tralala</span><span class="se">\n</span><span class="s2">*vertices 4</span><span class="se">\n</span><span class="s2">   1 &quot;A1&quot;         0.0938 0.0896   ellipse x_fact 1 y_fact 1</span><span class="se">\n</span><span class="s2">   2 &quot;Bb&quot;         0.8188 0.2458   ellipse x_fact 1 y_fact 1</span><span class="se">\n</span><span class="s2">   3 &quot;C&quot;          0.3688 0.7792   ellipse x_fact 1</span><span class="se">\n</span><span class="s2">   4 &quot;D2&quot;         0.9583 0.8563   ellipse x_fact 1</span><span class="se">\n</span><span class="s2">*arcs</span><span class="se">\n</span><span class="s2">1 1 1  h2 0 w 3 c Blue s 3 a1 -130 k1 0.6 a2 -130 k2 0.6 ap 0.5 l &quot;Bezier loop&quot; lc BlueViolet fos 20 lr 58 lp 0.3 la 360</span><span class="se">\n</span><span class="s2">2 1 1  h2 0 a1 120 k1 1.3 a2 -120 k2 0.3 ap 25 l &quot;Bezier arc&quot; lphi 270 la 180 lr 19 lp 0.5</span><span class="se">\n</span><span class="s2">1 2 1  h2 0 a1 40 k1 2.8 a2 30 k2 0.8 ap 25 l &quot;Bezier arc&quot; lphi 90 la 0 lp 0.65</span><span class="se">\n</span><span class="s2">4 2 -1  h2 0 w 1 k1 -2 k2 250 ap 25 l &quot;Circular arc&quot; c Red lc OrangeRed</span><span class="se">\n</span><span class="s2">3 4 1  p Dashed h2 0 w 2 c OliveGreen ap 25 l &quot;Straight arc&quot; lc PineGreen</span><span class="se">\n</span><span class="s2">1 3 1  p Dashed h2 0 w 5 k1 -1 k2 -20 ap 25 l &quot;Oval arc&quot; c Brown lc Black</span><span class="se">\n</span><span class="s2">3 3 -1  h1 6 w 1 h2 12 k1 -2 k2 -15 ap 0.5 l &quot;Circular loop&quot; c Red lc OrangeRed lphi 270 la 180&quot;&quot;&quot;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Bb&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D2&quot;</span><span class="p">])</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;A1&quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Bb&quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;Bb&quot;</span><span class="p">,</span> <span class="s2">&quot;A1&quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D2&quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;D2&quot;</span><span class="p">,</span> <span class="s2">&quot;Bb&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="bp">cls</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Tralala&quot;</span>
+        <span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">fname</span><span class="p">)</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestPajek.teardown_class"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.teardown_class">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">teardown_class</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">fname</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestPajek.test_parse_pajek_simple"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.test_parse_pajek_simple">[docs]</a>    <span class="k">def</span> <span class="nf">test_parse_pajek_simple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Example without node positions or shape</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;*Vertices 2</span><span class="se">\n</span><span class="s2">1 &quot;1&quot;</span><span class="se">\n</span><span class="s2">2 &quot;2&quot;</span><span class="se">\n</span><span class="s2">*Edges</span><span class="se">\n</span><span class="s2">1 2</span><span class="se">\n</span><span class="s2">2 1&quot;&quot;&quot;</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">parse_pajek</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">edges_equal</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{}),</span> <span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{})])</span></div>
+
+<div class="viewcode-block" id="TestPajek.test_parse_pajek"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.test_parse_pajek">[docs]</a>    <span class="k">def</span> <span class="nf">test_parse_pajek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">parse_pajek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Bb&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D2&quot;</span><span class="p">]</span>
+        <span class="c1"># print(G.edges)</span>
+        <span class="k">assert</span> <span class="n">edges_equal</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">test_parse_pajek_edges</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestPajek.test_parse_pajek_mat"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.test_parse_pajek_mat">[docs]</a>    <span class="k">def</span> <span class="nf">test_parse_pajek_mat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;*Vertices 3</span><span class="se">\n</span><span class="s2">1 &quot;one&quot;</span><span class="se">\n</span><span class="s2">2 &quot;two&quot;</span><span class="se">\n</span><span class="s2">3 &quot;three&quot;</span><span class="se">\n</span><span class="s2">*Matrix</span><span class="se">\n</span><span class="s2">1 1 0</span><span class="se">\n</span><span class="s2">0 1 0</span><span class="se">\n</span><span class="s2">0 1 0</span><span class="se">\n</span><span class="s2">&quot;&quot;&quot;</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">parse_pajek</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">}</span>
+        <span class="k">assert</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;two&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">}</span>
+        <span class="k">assert</span> <span class="n">edges_equal</span><span class="p">(</span>
+            <span class="c1"># set(G.edges),</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="p">(</span><span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+                <span class="p">(</span><span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+                <span class="p">(</span><span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+                <span class="p">(</span><span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+            <span class="p">],</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestPajek.test_read_pajek"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.test_read_pajek">[docs]</a>    <span class="k">def</span> <span class="nf">test_read_pajek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">parse_pajek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">Gin</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">read_pajek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Gin</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">edges_equal</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">Gin</span><span class="o">.</span><span class="n">edges</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">graph</span> <span class="o">==</span> <span class="n">Gin</span><span class="o">.</span><span class="n">graph</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">==</span> <span class="n">Gin</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">n</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="TestPajek.test_write_pajek"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.test_write_pajek">[docs]</a>    <span class="k">def</span> <span class="nf">test_write_pajek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">io</span>
+
+        <span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">parse_pajek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+        <span class="n">eg</span><span class="o">.</span><span class="n">write_pajek</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">fh</span><span class="p">)</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">read_pajek</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">nodes_equal</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">H</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="n">edges_equal</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">edges</span><span class="p">))</span></div>
+        <span class="c1"># Graph name is left out for now, therefore it is not tested.</span>
+        <span class="c1"># assert_equal(G.graph, H.graph)</span>
+
+<div class="viewcode-block" id="TestPajek.test_ignored_attribute"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.test_ignored_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">test_ignored_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">io</span>
+
+        <span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">int_attr</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">empty_attr</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">int_attr</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">empty_attr</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
+
+        <span class="kn">import</span> <span class="nn">warnings</span>
+
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">(</span><span class="n">record</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
+            <span class="n">eg</span><span class="o">.</span><span class="n">write_pajek</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">fh</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span></div>
+
+<div class="viewcode-block" id="TestPajek.test_noname"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.test_noname">[docs]</a>    <span class="k">def</span> <span class="nf">test_noname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Make sure we can parse a line such as:  *network</span>
+        <span class="c1"># Issue #952</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;*network</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">other_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">other_lines</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">parse_pajek</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestPajek.test_unicode"><a class="viewcode-back" href="../../../../reference/easygraph.readwrite.tests.html#easygraph.readwrite.tests.test_pajek.TestPajek.test_unicode">[docs]</a>    <span class="k">def</span> <span class="nf">test_unicode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">io</span>
+
+        <span class="n">G</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+        <span class="n">name1</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">2344</span><span class="p">)</span> <span class="o">+</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span> <span class="o">+</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">6543</span><span class="p">)</span>
+        <span class="n">name2</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">5543</span><span class="p">)</span> <span class="o">+</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">1543</span><span class="p">)</span> <span class="o">+</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">324</span><span class="p">)</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">name1</span><span class="p">,</span> <span class="s2">&quot;Radiohead&quot;</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="n">name2</span><span class="p">)</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+        <span class="n">eg</span><span class="o">.</span><span class="n">write_pajek</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">fh</span><span class="p">)</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">eg</span><span class="o">.</span><span class="n">read_pajek</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">nodes_equal</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">H</span><span class="p">))</span>
+        <span class="c1"># from icecream import ic</span>
+        <span class="c1"># ic(G.edges)</span>
+        <span class="c1"># ic(H.edges)</span>
+        <span class="c1"># ic(G.graph)</span>
+        <span class="c1"># ic(H.graph)</span>
+        <span class="c1"># assert edges_equal(list(G.edges), list(H.edges))</span>
+        <span class="k">assert</span> <span class="n">G</span><span class="o">.</span><span class="n">graph</span> <span class="o">==</span> <span class="n">H</span><span class="o">.</span><span class="n">graph</span></div></div>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020-2023, Mobile Systems and Networking Group, Fudan University
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/scripts/furo.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    </body>
+</html>
