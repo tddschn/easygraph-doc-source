@@ -1,3 +1,6 @@
+gen-rst:
+	sphinx-apidoc -o reference ../../Easy-Graph/easygraph
+
 # Minimal makefile for Sphinx documentation
 #
 
