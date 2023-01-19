@@ -1,5 +1,7 @@
 # easygraph-doc-source
 
+Scripts and guides for generating documentation for EasyGraph.
+
 - [easygraph-doc-source](#easygraph-doc-source)
   - [Prerequisites](#prerequisites)
   - [Update `rst` files](#update-rst-files)
