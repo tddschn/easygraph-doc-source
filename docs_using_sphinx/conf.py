@@ -12,6 +12,7 @@
 #
 import os
 import sys
+
 sys.path.append(os.path.abspath('sphinxext'))
 print(sys.path)
 
@@ -56,7 +57,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '*test*.rst']
 
 # Options for LaTeX output
 # ------------------------
@@ -73,8 +74,7 @@ latex_paper_size = "letter"
 html_theme = 'furo'
 
 # html_theme_options in conf.py is used for customisations that affect the entire documentation. This is for stuff like fonts and colors.
-html_theme_options = {
-}
+html_theme_options = {}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

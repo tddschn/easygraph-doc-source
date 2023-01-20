@@ -20,22 +20,6 @@ easygraph.tests.teddy\_test\_cpp\_easygraph\_sanity\_check module
    :undoc-members:
    :show-inheritance:
 
-easygraph.tests.test\_convert module
-------------------------------------
-
-.. automodule:: easygraph.tests.test_convert
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-easygraph.tests.test\_cpp\_easygraph module
--------------------------------------------
-
-.. automodule:: easygraph.tests.test_cpp_easygraph
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Module contents
 ---------------
 

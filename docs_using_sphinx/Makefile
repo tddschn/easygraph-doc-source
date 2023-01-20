@@ -1,5 +1,10 @@
-gen-rst:
-	sphinx-apidoc -o reference ../../Easy-Graph/easygraph
+gen-rst: clean-rst
+	# sphinx-apidoc -o reference ../../Easy-Graph/easygraph
+	sphinx-apidoc   -o reference ../../Easy-Graph/easygraph '../../Easy-Graph/easygraph/**/test_*.py' '../../Easy-Graph/easygraph/**/tests'
+
+clean-rst:
+	rm -rf reference
+	mkdir -p reference
 
 # Minimal makefile for Sphinx documentation
 #
@@ -15,7 +20,7 @@ BUILDDIR      = _build
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+.PHONY: help Makefile *
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
