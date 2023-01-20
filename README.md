@@ -9,6 +9,8 @@ Scripts and guides for generating documentation for EasyGraph.
     - [Generate `rst` files from docstrings as references](#generate-rst-files-from-docstrings-as-references)
   - [Build HTML from `rst` files](#build-html-from-rst-files)
   - [Deploy to easy-graph.github.io](#deploy-to-easy-graphgithubio)
+  - [Troubleshooting](#troubleshooting)
+    - [Reference built but not correctly displayed on the website](#reference-built-but-not-correctly-displayed-on-the-website)
 
 ## Prerequisites
 
@@ -57,3 +59,8 @@ make sync-to-doc-pub-repo
 ```
 
 - Push the changes of these two repository to their remotes
+
+## Troubleshooting
+
+### Reference built but not correctly displayed on the website
+- Check the `toctree` of `reference.rst`, you may need to manually update the section to reflect the built references.
