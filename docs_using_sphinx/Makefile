@@ -1,6 +1,6 @@
 gen-rst: clean-rst
 	# sphinx-apidoc -o reference ../../Easy-Graph/easygraph
-	sphinx-apidoc   -o reference ../../Easy-Graph/easygraph '../../Easy-Graph/easygraph/**/test_*.py' '../../Easy-Graph/easygraph/**/tests'
+	sphinx-apidoc   -o reference ../../Easy-Graph/easygraph '../../Easy-Graph/easygraph/**/test_*.py' '../../Easy-Graph/easygraph/**/tests' '../../Easy-Graph/easygraph/tests'
 
 clean-rst:
 	rm -rf reference

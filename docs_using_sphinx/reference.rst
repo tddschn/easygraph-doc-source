@@ -36,6 +36,5 @@ methods in the same platform.
     reference/easygraph.readwrite.json_graph.rst
     reference/easygraph.readwrite.rst
     reference/easygraph.rst
-    reference/easygraph.tests.rst
     reference/easygraph.utils.rst
     reference/modules.rst
