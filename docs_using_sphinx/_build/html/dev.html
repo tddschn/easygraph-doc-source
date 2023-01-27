@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Installation" href="install.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2022.12.07 -->
-        <title>EasyGraph 0.2a40</title>
+        <title>Developer Documentation - EasyGraph 0.2a40</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/my_theme.css" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">EasyGraph 0.2a40</div></a>
+      <a href="index.html"><div class="brand">EasyGraph 0.2a40</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -144,7 +144,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="index.html">
   
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
@@ -289,10 +289,6 @@
 <li class="toctree-l1"><a class="reference internal" href="contributorGuide.html">Contributor Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sourcecode.html">Source Code</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="dev.html">Developer Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="dev/releasing.html">Building and Releasing python-easygraph</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="aboutus.html">About Us</a></li>
 </ul>
 
@@ -328,78 +324,18 @@
           </label>
         </div>
         <article role="main">
-          <section id="welcome-to-easygraph">
-<h1>Welcome to EasyGraph !<a class="headerlink" href="#welcome-to-easygraph" title="Permalink to this heading"></a></h1>
-<a class="reference external image-reference" href="https://pypi.org/project/Python-EasyGraph/"><img alt="https://img.shields.io/pypi/v/Python-EasyGraph.svg" src="https://img.shields.io/pypi/v/Python-EasyGraph.svg" /></a>
-<a class="reference external image-reference" href="https://pypi.org/project/Python-EasyGraph/"><img alt="https://img.shields.io/pypi/pyversions/Python-EasyGraph.svg" src="https://img.shields.io/pypi/pyversions/Python-EasyGraph.svg" /></a>
-<a class="reference external image-reference" href="https://github.com/easy-graph/Easy-Graph/blob/master/LICENSE"><img alt="https://img.shields.io/pypi/l/Python-EasyGraph" src="https://img.shields.io/pypi/l/Python-EasyGraph" /></a>
-<p>EasyGraph is an open source graph processing library. It is written in Python and supports analysis for undirected graphs and directed graphs.
-It covers advanced graph processing methods in structural hole spanners detection, graph embedding and several classic methods (subgraph
-generation, connected component discovery and isomorphic graph generation).</p>
-<p>EasyGraph integrates state-of-the-art graph processing approaches and implements them using Python. EasyGraph covers a series of advanced graph
-processing algorithms include structural hole spanners detection (HIS, MaxD, Common_Greedy, AP_Greedy and HAM), and graph representation learning
-(DeepWalk, Node2Vec, LINE and SDNE). Besides, for a number of general graph processing approaches, EasyGraph optimizes the algorithms and introduces
-parallel computing methods to achieve high efficiency.</p>
+          <section id="developer-documentation">
+<h1>Developer Documentation<a class="headerlink" href="#developer-documentation" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="example.html#using-easygraph-to-analysis-and-draw-structural-hole-spanners-on-karate-club-dataset">Using EasyGraph to analysis and draw Structural Hole Spanners on karate club dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html#basic-properties-and-operation-of-graph">Basic Properties and Operation of Graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html#detection-of-structural-hole-spanners">Detection of Structural Hole Spanners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html#using-c-code-to-achieve-a-better-performance">Using C++ code to achieve a better performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/releasing.html">Building and Releasing python-easygraph</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev/releasing.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/releasing.html#build-and-release-to-pypi">Build and Release to PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/releasing.html#build-and-release-to-test-pypi">Build and Release to Test PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/releasing.html#build-only">Build only</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.classes.html">easygraph.classes package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.datasets.html">easygraph.datasets package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.basic.html">easygraph.functions.basic package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.centrality.html">easygraph.functions.centrality package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.community.html">easygraph.functions.community package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.components.html">easygraph.functions.components package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.drawing.html">easygraph.functions.drawing package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.graph_embedding.html">easygraph.functions.graph_embedding package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.graph_generator.html">easygraph.functions.graph_generator package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.path.html">easygraph.functions.path package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.html">easygraph.functions package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.functions.structural_holes.html">easygraph.functions.structural_holes package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.model.hypergraphs.html">easygraph.model.hypergraphs package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.model.html">easygraph.model package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.nn.convs.hypergraphs.html">easygraph.nn.convs.hypergraphs package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.nn.convs.html">easygraph.nn.convs package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.nn.html">easygraph.nn package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.random.html">easygraph.random package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.readwrite.json_graph.html">easygraph.readwrite.json_graph package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.readwrite.html">easygraph.readwrite package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.html">easygraph package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/easygraph.utils.html">easygraph.utils package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/modules.html">easygraph</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="videos.html">Tutorial Videos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contributorGuide.html">Contributor Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#table-of-contents">Table of contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#before-submitting-a-bug-report">Before submitting a bug report</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#how-do-i-submit-a-bug-report">How do I submit a bug report?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#before-submitting-an-enhancement-suggestion">Before submitting an enhancement suggestion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#how-do-i-submit-an-enhancement-suggestion">How do I submit an Enhancement suggestion?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#picking-an-issue">Picking an issue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#local-development">Local development</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#run-the-tests-locally">Run the Tests Locally</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#pull-requests">Pull requests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#triage-steps">Triage steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#release-branch">Release branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributorGuide.html#bug-fix-branch">Bug fix branch</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">Source Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dev/releasing.html">Building and Releasing python-easygraph</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="aboutus.html">About Us</a></li>
 </ul>
 </div>
 </section>
@@ -409,15 +345,7 @@ parallel computing methods to achieve high efficiency.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="install.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Installation</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
+          
           
         </div>
         <div class="bottom-of-page">
