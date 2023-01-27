@@ -1,8 +1,8 @@
-# easygraph-doc-source
+# Scripts and guides for generating documentation for EasyGraph
 
-Scripts and guides for generating documentation for EasyGraph.
+Repository: [easygraph-doc-source](https://github.com/easy-graph/easygraph-doc-source)
 
-- [easygraph-doc-source](#easygraph-doc-source)
+- [Scripts and guides for generating documentation for EasyGraph](#scripts-and-guides-for-generating-documentation-for-easygraph)
   - [Prerequisites](#prerequisites)
   - [Update `rst` files](#update-rst-files)
     - [Edit manually created `rst` files](#edit-manually-created-rst-files)
@@ -55,7 +55,7 @@ make gen-rst
 
 ```bash
 cd easygraph-doc-source
-make sync-to-doc-pub-repo
+make sync-doc-pub-repo
 ```
 
 - Push the changes of these two repository to their remotes

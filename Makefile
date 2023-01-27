@@ -15,6 +15,8 @@ update-doc-pub-repo: ## update the docs to the easy-graph.github.io repo
 gen-easygraph-doc-source-rst: ## generate the easygraph-doc-source.rst file
 	pandoc README.md -o docs_using_sphinx/dev/easygraph-doc-source.rst
 
+push-all: ## push all changes to the remote repos
+	git-pp --push . ../easy-graph.github.io
 
 .PHONY: *
 
