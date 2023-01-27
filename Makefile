@@ -15,6 +15,10 @@ update-doc-pub-repo: ## update the docs to the easy-graph.github.io repo
 gen-easygraph-doc-source-rst: ## generate the easygraph-doc-source.rst file
 	pandoc README.md -o docs_using_sphinx/dev/easygraph-doc-source.rst
 
+sync-egeps: ## sync the egeps to the docs_using_sphinx/egeps dir
+	rsync -au --delete --progress -h ../egeps/ ./docs_using_sphinx/egeps --exclude='../egeps/*' --exclude='../egeps/.*' --include='../egeps/*.rst'
+	rm -rf docs_using_sphinx/egeps/.git
+
 push-all: ## push all changes to the remote repos
 	git-pp --push . ../easy-graph.github.io
 
