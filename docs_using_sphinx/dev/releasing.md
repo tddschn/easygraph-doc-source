@@ -1,6 +1,6 @@
 # Building and Releasing python-easygraph
 
-Author: [Teddy Xinyuan Chen](https://github.com/tddschn)
+<!-- Author: [Teddy Xinyuan Chen](https://github.com/tddschn) -->
 
 - [Building and Releasing python-easygraph](#building-and-releasing-python-easygraph)
   - [Prerequisites](#prerequisites)

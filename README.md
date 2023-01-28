@@ -1,6 +1,6 @@
 # Scripts and guides for generating documentation for EasyGraph
 
-Author: [Teddy Xinyuan Chen](https://github.com/tddschn)
+<!-- Author: [Teddy Xinyuan Chen](https://github.com/tddschn) -->
 
 Repository: [easygraph-doc-source](https://github.com/easy-graph/easygraph-doc-source)
 
