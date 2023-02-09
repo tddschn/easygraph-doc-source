@@ -10,7 +10,8 @@ _build/*
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -50,3 +51,4 @@ Backup of *.doc*
 # Visio autosave temporary files
 *.~vsd*
 
+.idea/
