@@ -38,7 +38,6 @@ parallel computing methods to achieve high efficiency.
    license.rst
    sourcecode.rst
 
-   :titlesonly: 
 
    dev.rst
 ..    :maxdepth: 1
