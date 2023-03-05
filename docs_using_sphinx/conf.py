@@ -1,4 +1,4 @@
-source_suffix = ['.rst', '.md', '.html']
+# source_suffix = ['.rst', '.md', '.html']
 
 # Configuration file for the Sphinx documentation builder.
 #
@@ -85,7 +85,7 @@ html_theme_options = {}
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-html_extra_path = ['tutorial.html']
+# html_extra_path = ['tutorial.html']
 
 # add your project’s logo in the documentation
 html_logo = "logo.png"
