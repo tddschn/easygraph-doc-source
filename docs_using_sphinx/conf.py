@@ -1,3 +1,5 @@
+# source_suffix = ['.rst', '.md', '.html']
+
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -12,7 +14,10 @@
 #
 import os
 import sys
-sys.path.append("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages")
+
+sys.path.append(
+    "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages"
+)
 sys.path.append(os.path.abspath('sphinxext'))
 print(sys.path)
 
@@ -80,6 +85,7 @@ html_theme_options = {}
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+# html_extra_path = ['tutorial.html']
 
 # add your project’s logo in the documentation
 html_logo = "logo.png"
