@@ -18,6 +18,8 @@ import sys
 sys.path.append(
     "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages"
 )
+
+
 sys.path.append(os.path.abspath('sphinxext'))
 print(sys.path)
 
