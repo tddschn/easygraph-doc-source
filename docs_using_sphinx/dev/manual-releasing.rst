@@ -1,12 +1,12 @@
-Building and Releasing python-easygraph
-=======================================
+(Mostly) Manually Building and Releasing python-easygraph
+=========================================================
 
 .. raw:: html
 
    <!-- Author: [Teddy Xinyuan Chen](https://github.com/tddschn) -->
 
--  `Building and Releasing
-   python-easygraph <#building-and-releasing-python-easygraph>`__
+-  `(Mostly) Manually Building and Releasing
+   python-easygraph <#mostly-manually-building-and-releasing-python-easygraph>`__
 
    -  `Prerequisites <#prerequisites>`__
 

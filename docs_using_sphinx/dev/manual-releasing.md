@@ -1,8 +1,8 @@
-# Building and Releasing python-easygraph
+# (Mostly) Manually Building and Releasing python-easygraph
 
 <!-- Author: [Teddy Xinyuan Chen](https://github.com/tddschn) -->
 
-- [Building and Releasing python-easygraph](#building-and-releasing-python-easygraph)
+- [(Mostly) Manually Building and Releasing python-easygraph](#mostly-manually-building-and-releasing-python-easygraph)
   - [Prerequisites](#prerequisites)
     - [Install GitHub CLI](#install-github-cli)
   - [Build for Linux x86\_64](#build-for-linux-x86_64)
