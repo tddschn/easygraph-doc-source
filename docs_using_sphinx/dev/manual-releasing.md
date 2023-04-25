@@ -42,7 +42,7 @@ Locate find the built `.whl` files.
 
 ## Put all the wheel files and source distribution in a directory and upload to PyPI
 
-Put all the wheel files and source distribution in a directory built in the previous 2 steps, and run
+Put all the wheel files and source distribution built in the previous 2 steps in a directory `<your_directory>`, and run
 
 ```
 python3 -m twine upload <your_directory>/*
