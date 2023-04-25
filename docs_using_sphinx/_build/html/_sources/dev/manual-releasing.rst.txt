@@ -1,12 +1,16 @@
-Building and Releasing python-easygraph
-=======================================
+(Mostly) Manually Building and Releasing python-easygraph
+=========================================================
 
 .. raw:: html
 
    <!-- Author: [Teddy Xinyuan Chen](https://github.com/tddschn) -->
 
--  `Building and Releasing
-   python-easygraph <#building-and-releasing-python-easygraph>`__
+We choose to build Linux wheels on GitHub Actions because it’s reliable.
+For other platforms, we build manually on our machines, because we’ve
+yet to find a way to make it work on GitHub Actions.
+
+-  `(Mostly) Manually Building and Releasing
+   python-easygraph <#mostly-manually-building-and-releasing-python-easygraph>`__
 
    -  `Prerequisites <#prerequisites>`__
 
@@ -50,14 +54,16 @@ Build for other platforms
 Do it manually on your machines:
 
 .. code:: bash
+
    python3.{7..10} setup.py build_ext # expand the command yourself, to python3.10 etc
+
 Locate find the built ``.whl`` files.
 
 Put all the wheel files and source distribution in a directory and upload to PyPI
 ---------------------------------------------------------------------------------
 
-Put all the wheel files and source distribution in a directory built in
-the previous 2 steps, and run
+Put all the wheel files and source distribution built in the previous 2
+steps in a directory ``<your_directory>``, and run
 
 ::
 
