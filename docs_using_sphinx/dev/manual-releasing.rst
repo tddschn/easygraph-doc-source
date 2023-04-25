@@ -5,6 +5,10 @@
 
    <!-- Author: [Teddy Xinyuan Chen](https://github.com/tddschn) -->
 
+We choose to build Linux wheels on GitHub Actions because it’s reliable.
+For other platforms, we build manually on our machines, because we’ve
+yet to find a way to make it work on GitHub Actions.
+
 -  `(Mostly) Manually Building and Releasing
    python-easygraph <#mostly-manually-building-and-releasing-python-easygraph>`__
 
