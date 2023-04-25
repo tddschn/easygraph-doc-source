@@ -7,4 +7,5 @@ Developer Documentation
 
     contributorGuide.rst
     dev/releasing.rst
+    dev/manual-releasing.rst
     dev/easygraph-doc-source.rst
