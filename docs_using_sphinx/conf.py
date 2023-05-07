@@ -15,13 +15,10 @@
 import os
 import sys
 
-sys.path.append(
-    "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages"
-)
 
 
 sys.path.append(os.path.abspath('sphinxext'))
-print(sys.path)
+
 
 # -- Project information -----------------------------------------------------
 
@@ -30,7 +27,7 @@ copyright = '2020-2023, Mobile Systems and Networking Group, Fudan University'
 author = 'Mobile Systems and Networking Group, Fudan University'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2a46'
+release = '0.2a47'
 
 
 # -- General configuration ---------------------------------------------------
@@ -93,7 +90,7 @@ html_static_path = ['_static']
 html_logo = "logo.png"
 
 # change the sidebar title
-html_title = "EasyGraph 0.2a46"
+html_title = "EasyGraph 0.2a47"
 
 # Add the 'copybutton' javascript, to hide/show the prompt in code examples
 def setup(app):
