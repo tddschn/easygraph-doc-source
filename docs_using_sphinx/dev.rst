@@ -9,3 +9,4 @@ Developer Documentation
     dev/releasing.rst
     dev/manual-releasing.rst
     dev/easygraph-doc-source.rst
+
